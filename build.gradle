@@ -12,7 +12,7 @@ group = "jfrog"
 docker {
     useApi = false
     dockerBinary "/usr/local/bin/docker"
-    baseImage "ubuntu"
+    baseImage "dockerfile/ubuntu"
     maintainer 'Dror Bereznitsky "drorb@jfrog.com"'
 }
 
