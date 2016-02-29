@@ -1,0 +1,46 @@
+buildscript {
+    repositories { jcenter() }
+    dependencies {
+        classpath 'se.transmode.gradle:gradle-docker:1.2'
+    }
+}
+
+apply plugin: 'docker'
+
+group = "jfrog"
+
+docker {
+    useApi = false
+    dockerBinary "/usr/local/bin/docker"
+    baseImage "ubuntu"
+    maintainer 'Dror Bereznitsky "drorb@jfrog.com"'
+}
+
+task redisDocker(type: Docker) {
+    applicationName = "redis-demo"
+    runCommand """cd /tmp && wget http://download.redis.io/redis-stable.tar.gz && tar xvzf redis-stable.tar.gz &&
+      cd redis-stable &&
+      make &&
+      make install &&
+      cp -f src/redis-sentinel /usr/local/bin &&
+      mkdir -p /etc/redis &&
+      cp -f *.conf /etc/redis &&
+      rm -rf /tmp/redis-stable* &&
+      sed -i 's/^\\(bind .*\\)\$/# \\1/' /etc/redis/redis.conf &&
+      sed -i 's/^\\(daemonize .*\\)\$/# \\1/' /etc/redis/redis.conf &&
+      sed -i 's/^\\(dir .*\\)\$/# \\1\\ndir \\/data/' /etc/redis/redis.conf &&
+      sed -i 's/^\\(logfile .*\\)\$/# \\1/' /etc/redis/redis.conf"""
+    volume "/data"
+    //Define working directory.
+    workingDir "/data"
+
+    //Define default command.
+    defaultCommand(["redis-server", "/etc/redis/redis.conf"])
+
+    //Expose ports.
+    exposePort 6379
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.10'
+}
