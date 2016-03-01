@@ -18,6 +18,7 @@ apply plugin: 'org.tenne.rest'
 group = "jfrog"
 
 def env = System.getenv()
+def dockerImage = "jfrog/redis-demo:3.0_" + env['BUILD_NUMBER']
 
 docker {
     useApi = false
@@ -27,6 +28,10 @@ docker {
 }
 
 task redisDocker(type: Docker) {
+    doFirst {
+        println "Building '$dockerImage' and pushing to bintraydemo-docker-dockerv2-local.artifactoryonline.com ... "
+    }
+
     applicationName = "redis-demo"
     tagVersion = "3.0_${env['BUILD_NUMBER']}"
     tag = "bintraydemo-docker-dockerv2-local.artifactoryonline.com/jfrog/redis-demo"
@@ -57,8 +62,6 @@ task redisDocker(type: Docker) {
     exposePort 6379
 }
 
-def dockerImage = "jfrog/redis-demo:3.0_" + env['BUILD_NUMBER']
-
 task pushToBintray(type: org._10ne.gradle.rest.RestTask) {
     description 'Pushing Docker image from Artifactory to Bintray'
 
@@ -79,8 +82,6 @@ task pushToBintray(type: org._10ne.gradle.rest.RestTask) {
     requestContentType = groovyx.net.http.ContentType.JSON
 
     responseHandler = {
-        //Configured content type is JSON and we let the client's handler parse the response for us
-        assert it.status == 200
         println "Successfully pushed '${dockerImage}' to https://bintray.com/jfrog-int/demoreg/jfrog:redis-demo/ "
     }
 
