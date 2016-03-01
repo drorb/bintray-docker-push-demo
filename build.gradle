@@ -17,6 +17,8 @@ apply plugin: 'org.tenne.rest'
 
 group = "jfrog"
 
+def env = System.getenv()
+
 docker {
     useApi = false
     dockerBinary "/usr/local/bin/docker"
