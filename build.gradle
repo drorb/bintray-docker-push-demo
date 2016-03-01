@@ -19,7 +19,7 @@ docker {
 
 task redisDocker(type: Docker) {
     applicationName = "redis-demo"
-    tag = "bintraydemo-docker-dockerv2-local.artifactoryonline.com/jfrog/redis-demo:latest"
+    tag = "bintraydemo-docker-dockerv2-local.artifactoryonline.com/jfrog/redis-demo"
     push true
     runCommand """\\
       cd /tmp && \\
