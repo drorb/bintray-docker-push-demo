@@ -26,6 +26,7 @@ docker {
 
 task redisDocker(type: Docker) {
     applicationName = "redis-demo"
+    tagVersion = "3.0_${env['BUILD_NUMBER']}"
     tag = "bintraydemo-docker-dockerv2-local.artifactoryonline.com/jfrog/redis-demo"
     push true
     runCommand """\\
