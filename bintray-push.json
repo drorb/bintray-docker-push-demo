@@ -1,6 +1,0 @@
-{
-  "dockerImage": "jfrog/redis-demo:latest",
-  "bintraySubject": "jfrog-int",
-  "bintrayRepo": "demoreg",
-  "async": false
-}
