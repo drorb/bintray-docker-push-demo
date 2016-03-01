@@ -19,7 +19,7 @@ group = "jfrog"
 
 def env = System.getenv()
 def imageVersion = "3.0_${env['BUILD_NUMBER']}"
-def dockerImage = "jfrog/redis-demo:${imageVersion}"
+def dockerImage = "jfrog/redis-demo:" + imageVersion
 
 docker {
     useApi = false
