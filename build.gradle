@@ -67,6 +67,8 @@ task pushToBintray(type: org._10ne.gradle.rest.RestTask) {
 
     doFirst {
         println "Pushing '${dockerImage}' to Bintray ..."
+        println "\tBintray organization: jfrog-int"
+        println "\tBintray repo: demoreg"
     }
 
     httpMethod = 'post'
