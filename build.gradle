@@ -57,7 +57,7 @@ task redisDocker(type: Docker) {
 
 task pushToBintray(type: org._10ne.gradle.rest.RestTask) {
     httpMethod = 'post'
-    uri = 'https://bintraydemo.artifactoryonline.com/api/bintray/docker/push/dockerv2-local'
+    uri = 'https://bintraydemo.artifactoryonline.com/bintraydemo/api/bintray/docker/push/dockerv2-local'
     username = 'admin'
     password = System.properties['artifactoryPassword']
     requestBody = [
