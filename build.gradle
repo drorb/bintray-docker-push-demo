@@ -82,7 +82,7 @@ task pushToBintray(type: org._10ne.gradle.rest.RestTask) {
     requestContentType = groovyx.net.http.ContentType.JSON
 
     responseHandler = {
-        println "Successfully pushed '${dockerImage}' to https://bintray.com/jfrog-int/demoreg/jfrog:redis-demo/ "
+        println "Successfully pushed '${dockerImage}' to https://bintray.com/jfrog-int/demoreg/jfrog:redis-demo/3.0_${env['BUILD_NUMBER']}/"
     }
 
 
