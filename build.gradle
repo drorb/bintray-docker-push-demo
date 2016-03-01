@@ -63,7 +63,7 @@ task pushToBintray(type: org._10ne.gradle.rest.RestTask) {
     username = 'admin'
     password = System.properties['artifactoryPassword']
     requestBody = [
-        "dockerImage": "jfrog/redis-demo:3.0_${env['BUILD_NUMBER']}",
+        "dockerImage": "jfrog/redis-demo:3.0_" + env['BUILD_NUMBER'],
         "bintraySubject": "jfrog-int",
         "bintrayRepo": "demoreg",
         "async": false
