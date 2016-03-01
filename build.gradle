@@ -12,8 +12,9 @@ group = "jfrog"
 docker {
     useApi = false
     dockerBinary "/usr/local/bin/docker"
-    baseImage "drorbr/ubuntu"
+    baseImage "jfrog/ubuntu"
     maintainer 'Dror Bereznitsky "drorb@jfrog.com"'
+    registry "bintraydemo-docker-dockerv2-local.artifactoryonline.com"
 }
 
 task redisDocker(type: Docker) {
