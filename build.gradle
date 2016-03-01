@@ -14,10 +14,12 @@ docker {
     dockerBinary "/usr/local/bin/docker"
     baseImage "drorbr/ubuntu:latest"
     maintainer 'Dror Bereznitsky "drorb@jfrog.com"'
+    registry "https://bintraydemo-docker-dockerv2-local.artifactoryonline.com"
 }
 
 task redisDocker(type: Docker) {
     applicationName = "redis-demo"
+    push true
     runCommand """\\
       cd /tmp && \\
       wget http://download.redis.io/redis-stable.tar.gz && \\
